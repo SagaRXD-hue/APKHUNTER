@@ -33,9 +33,10 @@ def calculate_risk(results):
 
 
     # Scan all sections
-    for key in results:
+    for key, value in results.items():
+        if isinstance(value, list):
+            extract_from_list(value)
 
-        extract_from_list(results[key])
 
 
 

@@ -8,6 +8,7 @@ import time
 import xml.etree.ElementTree as ET
 from static_tools import sensitive_info_extractor, scan_android_manifest, crypto_checker, m10_checker, m8_checker, risk_engine
 from static_tools import m7_checker, m4_m6_checker
+from static_tools import m1_checker, m2_checker, m4_checker, m6_checker
 
 from static_tools.reverse_engineering import ReverseEngineeringDetector
 
@@ -373,16 +374,14 @@ if __name__ == "__main__":
         # M9: Reverse Engineering Detection
         util.mod_log("[+] Scanning for reverse engineering protection (M9)", util.OKCYAN)
 
-        source_code_dir = os.path.join(extracted_apk_path, "sources")
-
-        rev_detector = ReverseEngineeringDetector(source_code_dir)
-
+        rev_detector = ReverseEngineeringDetector(extracted_apk_path)
         rev_results = rev_detector.scan()
 
         if isinstance(rev_results, list):
             results_dict["reverse_engineering"] = rev_results
         else:
-            results_dict["reverse_engineering"] = []
+            results_dict["reverse_engineering"] = ["No reverse engineering protections detected."]
+
 
         # M7: Client Code Quality
         util.mod_log("[+] Scanning for client code quality issues (M7)", util.OKCYAN)
@@ -415,6 +414,22 @@ if __name__ == "__main__":
 
         results_dict["auth_issues"] = auth_list
         results_dict["authorization_issues"] = access_list
+
+        # M1
+        util.mod_log("[+] Scanning for platform usage (M1)", util.OKCYAN)
+        results_dict["platform_usage"] = m1_checker.scan_m1(source_code_dir)
+
+        # M2
+        util.mod_log("[+] Scanning for insecure data storage (M2)", util.OKCYAN)
+        results_dict["insecure_storage"] = m2_checker.scan_m2(source_code_dir)
+
+        # M4
+        util.mod_log("[+] Scanning for authentication issues (M4)", util.OKCYAN)
+        results_dict["auth_issues"] = m4_checker.scan_m4(source_code_dir)
+
+        # M6
+        util.mod_log("[+] Scanning for authorization issues (M6)", util.OKCYAN)
+        results_dict["authorization_issues"] = m6_checker.scan_m6(source_code_dir)
 
 
         # M10: Extraneous Functionality Detection
