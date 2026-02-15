@@ -1,6 +1,11 @@
 import os
 import re
 
+from .scan_utils import (
+    is_valid_source_file,
+    remove_comments,
+    load_whitelist
+)
 
 """
 M3: Insecure Communication Checker
@@ -28,14 +33,17 @@ def scan_m3(source_dir):
         print(f"Scanning {root}...")    
         for file in files:
 
-            if not file.endswith((".java", ".kt", ".xml", ".txt")):
+            if not is_valid_source_file(file):
                 continue
+
 
             file_path = os.path.join(root, file)
 
             try:
                 with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
                     content = f.read()
+
+                content = remove_comments(content)
 
 
                 for regex in compiled_patterns:

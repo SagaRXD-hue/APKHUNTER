@@ -1,5 +1,11 @@
 import os
 import re
+from .scan_utils import (
+    is_valid_source_file,
+    remove_comments,
+    load_whitelist
+)
+
 
 
 WEAK_CRYPTO_PATTERNS = {
@@ -47,8 +53,9 @@ def scan_crypto(source_dir):
 
         for file in files:
 
-            if not (file.endswith(".java") or file.endswith(".kt")):
+            if not is_valid_source_file(file):
                 continue
+
 
             path = os.path.join(root, file)
 

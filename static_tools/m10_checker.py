@@ -1,5 +1,11 @@
 import os
+
 import re
+from .scan_utils import (
+    is_valid_source_file,
+    remove_comments,
+    load_whitelist
+)
 
 
 # Debug / Backdoor Patterns
@@ -39,6 +45,7 @@ def scan_m10(source_dir, manifest_path):
     try:
         with open(manifest_path, "r", encoding="utf-8", errors="ignore") as f:
             manifest_data = f.read()
+            
 
         if 'android:debuggable="true"' in manifest_data:
 
@@ -78,14 +85,16 @@ def scan_m10(source_dir, manifest_path):
 
         for file in files:
 
-            if not (file.endswith(".java") or file.endswith(".kt")):
+            if not is_valid_source_file(file):
                 continue
+
 
             path = os.path.join(root, file)
 
             try:
                 with open(path, "r", encoding="utf-8", errors="ignore") as f:
                     data = f.read()
+                data = remove_comments(data)
             except:
                 continue
 

@@ -1,6 +1,11 @@
 import os
 import re
 
+from .scan_utils import (
+    is_valid_source_file,
+    remove_comments,
+    load_whitelist
+)
 
 ANTI_TAMPER_PATTERNS = {
 
