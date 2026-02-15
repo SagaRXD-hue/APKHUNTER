@@ -1,6 +1,10 @@
 import os
 
 import re
+
+
+from static_tools.utility.filter import should_ignore
+
 from .scan_utils import (
     is_valid_source_file,
     remove_comments,
@@ -67,7 +71,6 @@ def scan_m10(source_dir, manifest_path):
     # -------------------------
 
     for root, dirs, files in os.walk(source_dir):
-        print(f"Scanning {root}...")
         SKIP_DIRS = [
             "androidx",
             "kotlin",
@@ -84,12 +87,15 @@ def scan_m10(source_dir, manifest_path):
             continue
 
         for file in files:
+            if should_ignore(file):
+                continue
 
             if not is_valid_source_file(file):
                 continue
 
 
             path = os.path.join(root, file)
+            print(f"Scanning {path}...")
 
             try:
                 with open(path, "r", encoding="utf-8", errors="ignore") as f:

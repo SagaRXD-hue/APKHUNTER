@@ -1,6 +1,8 @@
 import os
 import re
 
+from static_tools.utility.filter import should_ignore
+
 
 def scan_m7(source_dir):
 
@@ -20,13 +22,15 @@ def scan_m7(source_dir):
 
 
     for root, _, files in os.walk(source_dir):
-        print(f"Scanning {root}...")
         for file in files:
+            if should_ignore(file):
+                continue
 
             if not file.endswith(".java"):
                 continue
 
             path = os.path.join(root, file)
+            print(f"Scanning {path}...")
 
             try:
                 with open(path, "r", encoding="utf-8", errors="ignore") as f:
