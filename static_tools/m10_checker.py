@@ -86,10 +86,10 @@ def scan_m10(source_dir, manifest_path):
 
         if any(lib in root.lower() for lib in SKIP_DIRS):
             continue
+        if should_ignore(root):
+            continue
 
         for file in files:
-            if should_ignore(file):
-                continue
 
             if not is_valid_source_file(file):
                 continue

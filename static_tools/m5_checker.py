@@ -34,6 +34,8 @@ def scan_crypto(source_dir):
     findings = []
 
     for root, dirs, files in os.walk(source_dir):
+        if should_ignore(root):
+            continue
         # Skip test and example code
         if "test" in root.lower() or "example" in root.lower():
             continue
@@ -54,8 +56,6 @@ def scan_crypto(source_dir):
             continue
 
         for file in files:
-            if should_ignore(file):
-                continue
 
             if not is_valid_source_file(file):
                 continue

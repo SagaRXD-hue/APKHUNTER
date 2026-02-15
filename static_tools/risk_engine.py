@@ -1,8 +1,8 @@
 SEVERITY_SCORES = {
-    "Critical": 20,
-    "High": 10,
-    "Medium": 5,
-    "Low": 2
+    "Critical": 45,
+    "High": 40,
+    "Medium": 20,
+    "Low": 10
 }
 
 
@@ -26,13 +26,13 @@ def calculate_risk(results):
 
             severity = item.get("severity", "Low")
             confidence = item.get("confidence", "Low")
-
-            base_score = SEVERITY_SCORES.get(severity, 2)
+            print(f"Severity: {severity}, Confidence: {confidence}")
+            base_score = SEVERITY_SCORES.get(severity, 10)
 
             # Confidence multipliers:
-            MULT = {"High": 1.0, "Medium": 0.6, "Low": 0.3}
+            MULT = {"High": 1.0, "Medium": 0.7, "Low": 0.5}
 
-            score = base_score * MULT.get(confidence, 0.3)
+            score = base_score * MULT.get(confidence, 0.7)
 
 
             total += score

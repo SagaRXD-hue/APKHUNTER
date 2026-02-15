@@ -13,10 +13,10 @@ def scan_m2(source_dir):
     results = []
 
     for root, _, files in os.walk(source_dir):
+        if should_ignore(root):
+            continue
         for f in files:
 
-            if should_ignore(f):
-                continue
             if f.endswith(".java"):
                 path = os.path.join(root, f)
                 print(f"Scanning {path}...")

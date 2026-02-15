@@ -48,9 +48,9 @@ def scan_m8(source_dir):
         if any(lib in root.lower() for lib in SKIP_DIRS):
             continue
 
+        if should_ignore(root):
+            continue
         for file in files:
-            if should_ignore(file):
-                continue
 
             if not (file.endswith(".java") or file.endswith(".kt")):
                 continue

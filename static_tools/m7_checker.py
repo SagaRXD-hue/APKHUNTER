@@ -22,9 +22,9 @@ def scan_m7(source_dir):
 
 
     for root, _, files in os.walk(source_dir):
+        if should_ignore(root):
+            continue
         for file in files:
-            if should_ignore(file):
-                continue
 
             if not file.endswith(".java"):
                 continue
