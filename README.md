@@ -1,5 +1,3 @@
-![APK-Hunter Banner](banner.png)
-
 # 🔍 APKHUNTER – Android Security Analysis Tool
 
 <p align="center">
