@@ -60,6 +60,7 @@ def scan_m10(source_dir, manifest_path):
     # -------------------------
 
     for root, dirs, files in os.walk(source_dir):
+        print(f"Scanning {root}...")
         SKIP_DIRS = [
             "androidx",
             "kotlin",

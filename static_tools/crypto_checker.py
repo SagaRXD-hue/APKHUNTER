@@ -25,6 +25,7 @@ def scan_crypto(source_dir):
     findings = []
 
     for root, dirs, files in os.walk(source_dir):
+        print(f"Scanning {root}...")
         # Skip test and example code
         if "test" in root.lower() or "example" in root.lower():
             continue

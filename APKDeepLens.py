@@ -8,6 +8,8 @@ import time
 import xml.etree.ElementTree as ET
 from static_tools import sensitive_info_extractor, scan_android_manifest, crypto_checker, m10_checker, m8_checker, risk_engine
 
+from static_tools.reverse_engineering import ReverseEngineeringDetector
+
 
 from report_gen import ReportGen, util
 
@@ -278,6 +280,7 @@ if __name__ == "__main__":
             "weak_crypto": "",
             "extraneous_functionality": [],
             "code_tampering": [],
+            "reverse_engineering": []
 
         }
 
@@ -361,7 +364,20 @@ if __name__ == "__main__":
         else:
             results_dict["code_tampering"] = []
 
-        
+        # M9: Reverse Engineering Detection
+        util.mod_log("[+] Scanning for reverse engineering protection (M9)", util.OKCYAN)
+
+        source_code_dir = os.path.join(extracted_apk_path, "sources")
+
+        rev_detector = ReverseEngineeringDetector(source_code_dir)
+
+        rev_results = rev_detector.scan()
+
+        if isinstance(rev_results, list):
+            results_dict["reverse_engineering"] = rev_results
+        else:
+            results_dict["reverse_engineering"] = []
+
         # M10: Extraneous Functionality Detection
         util.mod_log("[+] Scanning for extraneous functionality (M10)", util.OKCYAN)
 
