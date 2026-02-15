@@ -1,136 +1,185 @@
 ![APK-Hunter Banner](banner.png)
 
-# 📱 APKHUNTER --- Android APK Security Analyzer
+# 🔍 APKHUNTER – Android Security Analysis Tool
 
-APKHUNTER is a comprehensive static analysis framework for Android APK
-files. It scans decompiled source code to identify security
-vulnerabilities based on the **OWASP Mobile Top 10** and generates
-detailed security reports with a global risk score.
+<p align="center">
+  <img src="./banner.png" alt="APKHUNTER Banner" width="90%" />
+</p>
 
-------------------------------------------------------------------------
+> **APKHUNTER** is a comprehensive static analysis tool for Android applications, designed to detect security vulnerabilities based on the **OWASP Mobile Top 10**.
 
-## 🚀 Features
+---
 
--   APK decompilation using JADX\
--   Static source code analysis\
--   Hardcoded secrets detection\
--   Insecure communication detection\
--   Weak cryptography detection\
--   Extraneous functionality analysis\
--   Anti-tampering & reverse engineering checks\
--   Global risk scoring\
--   Report generation (JSON / PDF / HTML / TXT)\
--   Centralized logging
+## 📖 Table of Contents
 
-------------------------------------------------------------------------
+- [Features](#-features)
+- [OWASP Coverage](#-owasp-mobile-top-10-coverage)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Reports](#-reports)
+- [Project Structure](#-project-structure)
+- [Screenshots](#-screenshots)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## ✨ Features
+
+- 🔍 Static APK analysis using JADX
+- 📱 AndroidManifest inspection
+- 🔐 Hardcoded secret detection
+- 🌐 Insecure network communication scan
+- 🛡️ Code tampering & reverse engineering detection
+- 📊 Risk scoring engine
+- 📄 Multiple report formats (JSON, PDF, HTML, TXT)
+- ⚙️ CLI-based interface
+
+---
 
 ## 📌 OWASP Mobile Top 10 Coverage
 
-  ID    Category                    Support
-  ----- --------------------------- ---------
-  M1    Improper Platform Usage     Partial
-  M2    Insecure Data Storage       ✅
-  M3    Insecure Communication      ✅
-  M4    Insecure Authentication     ✅
-  M5    Insufficient Cryptography   ✅
-  M6    Broken Authorization        ✅
-  M7    Client Code Quality         Partial
-  M8    Code Tampering              ✅
-  M9    Reverse Engineering         ✅
-  M10   Extraneous Functionality    ✅
+| ID  | Category                     | Support |
+|-----|------------------------------|---------|
+| M1  | Improper Platform Usage      | Partial |
+| M2  | Insecure Data Storage         | ✅ Yes  |
+| M3  | Insecure Communication       | ✅ Yes  |
+| M4  | Insecure Authentication      | ✅ Yes  |
+| M5  | Insufficient Cryptography    | ✅ Yes  |
+| M6  | Broken Authorization         | ✅ Yes  |
+| M7  | Client Code Quality          | Partial |
+| M8  | Code Tampering               | ✅ Yes  |
+| M9  | Reverse Engineering          | ✅ Yes  |
+| M10 | Extraneous Functionality     | ✅ Yes  |
 
-------------------------------------------------------------------------
+---
 
-## 📥 Installation
+## 📦 Installation
 
-This repository includes a pre-configured virtual environment.
+### 1️⃣ Clone Repository
 
-``` bash
+```bash
 git clone https://github.com/SagaRXD-hue/APKHUNTER.git
 cd APKHUNTER
 ```
 
-Activate venv:
+### 2️⃣ Activate Virtual Environment
 
-### Windows
+> A virtual environment is already included.
 
-``` bash
+#### Windows
+```bash
 venv\Scripts\activate
 ```
 
-### Linux / macOS
-
-``` bash
+#### Linux / macOS
+```bash
 source venv/bin/activate
 ```
 
-------------------------------------------------------------------------
+### 3️⃣ Install Dependencies
 
-## ▶️ Usage
+```bash
+pip install -r requirements.txt
+```
 
-``` bash
+---
+
+## 🚀 Usage
+
+### Basic Scan
+
+```bash
 python APKHUNTER.py -apk sample.apk
 ```
 
-Generate report:
+### Generate JSON Report
 
-``` bash
-python APKHUNTER.py -apk sample.apk -report json -o reports
+```bash
+python APKHUNTER.py -apk sample.apk -report json -o reports/
 ```
 
-------------------------------------------------------------------------
+### Generate PDF Report
 
-## 📁 Output
+```bash
+python APKHUNTER.py -apk sample.apk -report pdf -o report.pdf
+```
 
-    reports/
-     ├── report_app.json
-     └── last_scan.log
+### Ignore Virtual Environment Check
 
-    app_source/
-     └── app/
+```bash
+python APKHUNTER.py -apk sample.apk --ignore_virtualenv
+```
 
-------------------------------------------------------------------------
+---
 
-## 📊 Risk Scoring
+## ⚙️ Command-Line Options
 
-  Severity   Score
-  ---------- -------
-  Critical   20
-  High       10
-  Medium     5
-  Low        2
+```text
+usage: APKHUNTER.py [-h] -apk APK [-v]
+                    [-source_code_path APK]
+                    [-report {json,pdf,html,txt}]
+                    [-o OUTPUT]
+                    [--ignore_virtualenv]
+                    [-l LOGLEVEL]
+```
 
-------------------------------------------------------------------------
+| Option | Description |
+|--------|-------------|
+| -apk | Path to APK file |
+| -v | Show version |
+| -source_code_path | Use pre-extracted source |
+| -report | Report format |
+| -o | Output path |
+| --ignore_virtualenv | Skip venv check |
+| -l | Logging level |
 
-## 🏗️ Structure
+---
 
-    APKHUNTER/
-    ├── APKHUNTER.py
-    ├── static_tools/
-    ├── analyzer/
-    ├── report_gen/
-    ├── risk_engine.py
-    ├── reports/
-    └── venv/
+## 📄 Reports
 
-------------------------------------------------------------------------
+APKHUNTER supports multiple report formats:
 
-## ⚠️ Limitations
+- 📘 **JSON** – Machine-readable output
+- 📕 **PDF** – Printable security report
+- 🌐 **HTML** – Interactive report
+- 📃 **TXT** – Plain text summary
 
--   Static analysis only
--   Possible false positives
--   Partial M1/M7 support
+Example output:
 
-------------------------------------------------------------------------
+```bash
+reports/report_file.json
+reports/report_file.pdf
+```
 
-## 📜 License
+---
 
-MIT License
+## 📁 Project Structure
 
-------------------------------------------------------------------------
+```text
+APKHUNTER/
+│
+├── analyzer/           # Reverse engineering checks
+├── static_tools/       # OWASP checkers
+├── report_gen/         # Report generators
+├── app_source/         # Decompiled APK source
+├── reports/            # Generated reports
+├── venv/               # Virtual environment
+├── APKHUNTER.py        # Main entry point
+└── requirements.txt
+```
 
-## 👨‍💻 Author
+---
 
-SagaRXD-hue
+## ⭐ Acknowledgements
 
-https://github.com/SagaRXD-hue
+- OWASP Mobile Top 10
+- JADX Decompiler
+- Open-source security community
+
+---
+
+<p align="center">
+  Developed by <b>Team Diamond</b> 💎
+</p>
+
