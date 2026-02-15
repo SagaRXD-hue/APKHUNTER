@@ -1,3 +1,5 @@
+![APK-Hunter Banner](banner.png)
+
 # 📱 APKHUNTER --- Android APK Security Analyzer
 
 APKHUNTER is a comprehensive static analysis framework for Android APK
