@@ -17,11 +17,11 @@ from static_tools import m1_checker, m2_checker, m3_checker, m9_checker
 from report_gen import ReportGen, util
 
 """
-    Title:      APKDeepLens
+    Title:      APK-Hunter
     Desc:       Android security insights in full spectrum.
-    Author:     Deepanshu Gajbhiye
+    Author:     TEAM DIAMOND
     Version:    1.0.0
-    GitHub URL: https://github.com/d78ui98/APKDeepLens
+    GitHub URL: https://github.com/SagaRXD-hue/APKHUNTER
 """
 
 logging.basicConfig(
@@ -53,17 +53,17 @@ class util(util):
     @staticmethod
     def print_logo():
         """
-        Logo for APKDeepLens
+        Logo for APK-Hunter
         """
         logo = f"""                 
-{util.OKGREEN} ████  █████  ██  ██    ( )                  (_ )                           {util.ENDC}
-{util.OKGREEN}██  ██ ██  ██ ██ ██    _| |  __     __  _ _   | |     __    ___    ___      {util.ENDC}
-{util.OKGREEN}██████ █████  ████   /'_` | /'_`\\ /'_`\\( '_`\\ | |    /'_`\\/' _ `\\/',__)     {util.ENDC}
-{util.OKGREEN}██  ██ ██     ██ ██ ( (_| |(  __/(  __/| (_) )| |__ (  __/| ( ) |\\__, \\     {util.ENDC}
-{util.OKGREEN}██  ██ ██     ██  ██`\\__,_)`\\___)`\\___)| ,__/'(____/`\\___)(_) (_)(____/     {util.ENDC}
-{util.OKGREEN}                                       | |                                  {util.ENDC}
-{util.OKGREEN}                                       (_)                                  {util.ENDC}
-{util.OKCYAN}                                              - Made By Deepanshu{util.ENDC}
+{util.OKGREEN}     :::     :::::::::  :::    :::         :::    ::: :::    ::: ::::    ::: ::::::::::: :::::::::: ::::::::: {util.ENDC} 
+{util.OKGREEN}   :+: :+:   :+:    :+: :+:   :+:          :+:    :+: :+:    :+: :+:+:   :+:     :+:     :+:        :+:    :+:{util.ENDC} 
+{util.OKGREEN}  +:+   +:+  +:+    +:+ +:+  +:+           +:+    +:+ +:+    +:+ :+:+:+  +:+     +:+     +:+        +:+    +:+{util.ENDC} 
+{util.OKGREEN} +#++:++#++: +#++:++#+  +#++:++   ######   +#++:++#++ +#+    +:+ +#+ +:+ +#+     +#+     +#++:++#   +#++:++#: {util.ENDC} 
+{util.OKGREEN} +#+     +#+ +#+        +#+  +#+           +#+    +#+ +#+    +#+ +#+  +#+#+#     +#+     +#+        +#+    +#+{util.ENDC} 
+{util.OKGREEN} #+#     #+# #+#        #+#   #+#          #+#    #+# #+#    #+# #+#   #+#+#     #+#     #+#        #+#    #+#{util.ENDC} 
+{util.OKGREEN} ###     ### ###        ###    ###         ###    ###  ########  ###    ####     ###     ########## ###    ###{util.ENDC} 
+{util.OKCYAN}                                                                                 -Made By TEAM DIAMOND{util.ENDC}
         """
         print(logo)
 
@@ -76,14 +76,14 @@ def parse_args():
 
     parser = argparse.ArgumentParser(
         description=(
-            "{BOLD}{GREEN}APKDeepLens:{ENDC}"
+            "{BOLD}{GREEN}APK-Hunter:{ENDC}"
             " Android security insights in full spectrum. "
         ).format(
             BOLD=util.BOLD, GREEN=util.OKCYAN, ENDC=util.ENDC
         ),
         epilog=(
             "For more information, visit our GitHub repository"
-            " - https://github.com/d78ui98/APKDeepLens"
+            " - https://github.com/SagaRXD-hue/APKHUNTER"
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
@@ -99,8 +99,8 @@ def parse_args():
         "-v",
         "-version",
         action="version",
-        version="APKDeepLens v1.0",
-        help="Display the version of APKDeepLens.",
+        version="APK-Hunter v1.0",
+        help="Display the version of APK-Hunter.",
     )
     parser.add_argument(
         "-source_code_path",
